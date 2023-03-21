@@ -1,13 +1,15 @@
 <template>
-    <header class="header">
+    <header :class="classesHeader">
         <header-nav
             :items="leftMenuItem"
         ></header-nav>
-        <div class="header__logo">
-            <inline-svg
-                :src="require('./../../assets/logo.svg')"
-            />
-        </div>
+        <router-link to="/">
+            <div class="header__logo">
+                <inline-svg
+                    :src="require('./../../assets/logo.svg')"
+                />
+            </div>
+        </router-link>
         <header-nav
             :items="rightMenuItem"
         ></header-nav>
@@ -21,6 +23,12 @@ export default {
     name: 'main-header',
     components: {
         HeaderNav
+    },
+    props: {
+        isFixed: {
+            type: Boolean,
+            default: true
+        }
     },
     data: function() {
         return {
@@ -64,6 +72,15 @@ export default {
                 },
             ],
         }
+    },
+    computed: {
+        classesHeader: function(){ 
+            return {
+                'header': true,
+                'header-absolute': this.isFixed == false,
+                'header-fixed': this.isFixed == true
+            }
+        }
     }
 }
 </script>
@@ -71,15 +88,25 @@ export default {
 <style scoped>
 .header {
     display: flex;
-}
-
-.header {
-    position: absolute;
-    left: 0;
-    right: 0;
     justify-content: space-between;
     align-items: center;
     z-index: 999;
     padding: 10px 30px;
+}
+
+.header-absolute {
+    position: absolute;
+}
+
+.header-fixed {
+    position: fixed;
+    background-color: var(--color-bg-red);
+}
+
+.header-absolute,
+.header-fixed {
+    left: 0;
+    right: 0;
+    margin-bottom: 150px;
 }
 </style>
