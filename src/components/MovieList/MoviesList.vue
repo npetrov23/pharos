@@ -1,25 +1,27 @@
 <template>
     <div class="schedule-block__movie">
         <div class="card-inner">
-            <div class="card-inner__top">
-                <div class="schedule-block__movie-picture">
-                    <img class="schedule-block__movie-picture-item" :src="img">
-                    <span class="schedule-block__movie-picture-tag">
-                        {{ tag }}
-                    </span>
+            <router-link :to="{ name: 'movie', params: {id: id+1}}">
+                <div class="card-inner__top">
+                    <div class="schedule-block__movie-picture">
+                        <img class="schedule-block__movie-picture-item" :src="img">
+                        <span class="schedule-block__movie-picture-tag">
+                            {{ tag }}
+                        </span>
+                    </div>
+                    <div class="schedule-block__movie-info">
+                        <div class="info schedule-block__movie-info-date">
+                            {{ date }}
+                        </div>
+                        <div class="info schedule-block__movie-info-title">
+                            {{ title }}
+                        </div>
+                        <div class="info schedule-block__movie-info-description">
+                            {{ description }}
+                        </div>
+                    </div>
                 </div>
-                <div class="schedule-block__movie-info">
-                    <div class="info schedule-block__movie-info-date">
-                        {{ date }}
-                    </div>
-                    <div class="info schedule-block__movie-info-title">
-                        {{ title }}
-                    </div>
-                    <div class="info schedule-block__movie-info-description">
-                        {{ description }}
-                    </div>
-                </div>
-            </div>
+            </router-link>
             <div class="card-inner__bottom">
                 <div class="schedule-block__movie-info-footer">
                     <div class="schedule-block__movie-info-footer-price">
@@ -43,6 +45,7 @@ export default {
         BaseButton
     },
     props: {
+        id: Number,
         img: String,
         tag: String,
         date: String,
